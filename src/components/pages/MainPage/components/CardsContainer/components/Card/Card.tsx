@@ -4,7 +4,7 @@ import { Button, Icon } from 'components/common'
 import styles from './Card.module.css'
 import { useDispatch } from 'react-redux'
 import { Dispatch } from 'redux'
-import { CharactersActions, deleteCharacter } from 'redux/chars/charsActions'
+import { CharactersActions, deleteCharacter, likeCharacter } from 'redux/chars/charsActions'
 
 interface Props {
     item: Character
@@ -19,8 +19,8 @@ export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
     },[dispatch, item.char_id])
 
     const handleLike = useCallback(() => {
-        item.isLiked = !item.isLiked
-    }, [item.char_id])
+        dispatch(likeCharacter(item.char_id))
+    }, [dispatch, item.char_id])
 
     return (
         <div className={styles.card}>

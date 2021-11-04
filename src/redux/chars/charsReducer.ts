@@ -46,6 +46,19 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
                 chars: state.chars.filter(char => char.char_id !== action.payload)
             }
         }
+        case CharsActionTypes.LIKE_CHAR: {
+            let char = state.chars[action.payload - 1] // cause char_id starts with 1 and not 0
+            char.isLiked = true
+            return {
+                ...state
+            }
+        }
+        case CharsActionTypes.FILTER_LIKED_CHARS_ON: {
+            return {
+                ...state,
+                chars: state.chars.filter(char => char.isLiked === true)
+            }
+        }
         default: return state
     }
 }

@@ -25,6 +25,11 @@ export type DeleteCharacterType = {
     payload: Character["char_id"]
 }
 
+export type LikeCharacterType = {
+    type: CharsActionTypes.LIKE_CHAR
+    payload: Character["char_id"]
+}
+
 export type FilterLikedCharactersType = {
     type: CharsActionTypes.FILTER_LIKED_CHARS_ON
 }
@@ -34,7 +39,7 @@ export type FilterLikedCharactersOffType = {
 }
 
 export type CharactersActions = CharactersRequestType | CharactersSuccessType | CharactersFailureType 
- | DeleteCharacterType | FilterLikedCharactersType | FilterLikedCharactersOffType
+| LikeCharacterType | DeleteCharacterType | FilterLikedCharactersType | FilterLikedCharactersOffType
 
 export const fetchCharactersRequest = (): CharactersRequestType => {
     return {
@@ -57,7 +62,7 @@ export const fetchCharactersFailure = (error: Error): CharactersFailureType => {
 }
 
 export const fetchCharacters = () => {
-    return (dispatch: Dispatch<CharactersActions>): void => {
+    return (dispatch: Dispatch<CharactersActions>) => {
         dispatch(fetchCharactersRequest())
         axios.get<Character[]>(BASE_URL)
         .then(response => {
@@ -74,5 +79,24 @@ export const deleteCharacter = (id: Character["char_id"]): DeleteCharacterType =
     return {
         type: CharsActionTypes.DELETE_CHAR,
         payload: id
+    }
+}
+
+export const likeCharacter = (id: Character["char_id"]): LikeCharacterType => {
+    return {
+        type: CharsActionTypes.LIKE_CHAR,
+        payload: id
+    }
+}
+
+export const filterLikedCharacters = (): FilterLikedCharactersType => {
+    return {
+        type: CharsActionTypes.FILTER_LIKED_CHARS_ON
+    }
+}
+
+export const filterLikedCharactersOff = (): FilterLikedCharactersOffType => {
+    return {
+        type: CharsActionTypes.FILTER_LIKED_CHARS_OFF
     }
 }
