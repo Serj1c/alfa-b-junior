@@ -6,36 +6,50 @@ import { Dispatch } from 'redux'
 
 type Error = string
 
-export type CharactersRequest = {
+export type CharactersRequestType = {
     type: CharsActionTypes.FETCH_CHARS_REQUEST
 }
 
-export type CharactersSuccess = {
+export type CharactersSuccessType = {
     type: CharsActionTypes.FETCH_CHARS_SUCCESS
     payload: Character[]
 }
 
-export type CharactersFailure = {
+export type CharactersFailureType = {
     type: CharsActionTypes.FETCH_CHARS_FAILURE
     payload: Error
 }
 
-export type CharactersActions = CharactersRequest | CharactersSuccess | CharactersFailure
+export type DeleteCharacterType = {
+    type: CharsActionTypes.DELETE_CHAR
+    payload: Character["char_id"]
+}
 
-export const fetchCharactersRequest = (): CharactersRequest => {
+export type FilterLikedCharactersType = {
+    type: CharsActionTypes.FILTER_LIKED_CHARS_ON
+}
+
+export type FilterLikedCharactersOffType = {
+    type: CharsActionTypes.FILTER_LIKED_CHARS_OFF
+}
+
+export type CharactersActions = CharactersRequestType | CharactersSuccessType | CharactersFailureType 
+ | DeleteCharacterType | FilterLikedCharactersType | FilterLikedCharactersOffType
+
+export const fetchCharactersRequest = (): CharactersRequestType => {
     return {
         type: CharsActionTypes.FETCH_CHARS_REQUEST
     }
 }
 
-export const fetchCharactersSuccess = (chars: Character[]): CharactersSuccess => {
+export const fetchCharactersSuccess = (chars: Character[]): CharactersSuccessType => {
     return {
         type: CharsActionTypes.FETCH_CHARS_SUCCESS,
         payload: chars
     }
 }
 
-export const fetchCharactersFailure = (error: Error): CharactersFailure => {
+export const fetchCharactersFailure = (error: Error): CharactersFailureType => {
     return {
         type: CharsActionTypes.FETCH_CHARS_FAILURE,
         payload: error
@@ -53,5 +67,12 @@ export const fetchCharacters = () => {
             const errMsg = error.message
             dispatch(fetchCharactersFailure(errMsg))
         })
+    }
+}
+
+export const deleteCharacter = (id: Character["char_id"]): DeleteCharacterType => {
+    return {
+        type: CharsActionTypes.DELETE_CHAR,
+        payload: id
     }
 }

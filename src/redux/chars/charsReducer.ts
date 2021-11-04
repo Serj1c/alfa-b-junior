@@ -40,6 +40,12 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
                 isLoaded: false
             }
         }
+        case CharsActionTypes.DELETE_CHAR: {
+            return {
+                ...state,
+                chars: state.chars.filter(char => char.char_id !== action.payload)
+            }
+        }
         default: return state
     }
 }

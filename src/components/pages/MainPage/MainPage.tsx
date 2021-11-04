@@ -11,6 +11,7 @@ export const MainPage: React.FunctionComponent = (): JSX.Element => {
 
     const dispatch = useDispatch()
     const chars = useSelector((state:AppStateType) => state.chars.chars)
+    console.log(chars)
 
 	useEffect(() => {
 		try {

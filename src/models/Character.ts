@@ -1,4 +1,4 @@
-export type Character = {
+export interface Character {
     char_id: number
     name: string
     birthday: string
@@ -8,4 +8,5 @@ export type Character = {
     appearance: number[]
     nickname: string
     portrayed: string
+    isLiked: boolean
 }
