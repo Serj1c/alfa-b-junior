@@ -1,8 +1,15 @@
 .card {
-  height: fit-content;
-  max-height: 350px;
+  height: 350px;
   display: flex;
   flex-direction: column;
+  border: solid 1px #000000;
+}
+
+.card_bottom {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card img {

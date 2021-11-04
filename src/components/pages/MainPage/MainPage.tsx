@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { CardsContainer } from './components'
-import { Header } from 'components/common'
-import axios from 'axios'
-import { BASE_URL } from 'constants/common'
-import { Character } from 'models/Character'
-import { useDispatch } from 'react-redux'
+import { Spinner } from 'components/common'
+import { Header, Icon, Button } from 'components/common'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchCharacters } from 'redux/chars/charsActions'
+import { AppStateType } from 'redux/rootReducer'
+import styles from './MainPage.module.css'
 
 export const MainPage: React.FunctionComponent = (): JSX.Element => {
 
-    const [items, setItems] = useState<Character[] | null>()
-
-    useEffect(() => {
-        const fetchItems = async () => {
-          const result = await axios.get(BASE_URL)
-          setItems(result.data)
-        }
-        fetchItems()
-    }, [])
-
     const dispatch = useDispatch()
+    const chars = useSelector((state:AppStateType) => state.chars.chars)
 
 	useEffect(() => {
 		try {
@@ -32,7 +23,12 @@ export const MainPage: React.FunctionComponent = (): JSX.Element => {
     return (
         <>
             <Header />
-            <CardsContainer items={items} />
+            <section className={styles.root}>
+                <Button>
+                    <span>Show only liked</span><Icon type="Filter" size="l" />
+                </Button>
+            </section>
+            {chars ? <CardsContainer chars={chars} /> : <Spinner />}
         </>
     )
 }

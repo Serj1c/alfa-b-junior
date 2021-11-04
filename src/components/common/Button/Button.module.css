@@ -1,0 +1,26 @@
+.button {
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.root_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+    background: skyblue;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .button {
+      width: 100%;
+    }
+}

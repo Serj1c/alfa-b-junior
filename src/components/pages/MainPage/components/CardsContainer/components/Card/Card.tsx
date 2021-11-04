@@ -1,5 +1,6 @@
 import React from 'react'
 import { Character } from 'models/Character'
+import { Icon } from 'components/common'
 import styles from './Card.module.css'
 
 interface Props {
@@ -10,14 +11,10 @@ export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
     return (
         <div className={styles.card}>
             <img src={item.img} alt="portrait"/>
-            <ul>
-                <li>
-                    <span>Name: {item.name}</span>
-                </li>
-                <li>
-                    <span>Actor: {item.portrayed}</span>
-                </li>
-            </ul>
+            <div className={styles.card_bottom}>
+                <Icon type="ThumbUp" size="l"/>
+                <Icon type="TrashBin" size="l" />
+            </div>
         </div>
     )
 }
