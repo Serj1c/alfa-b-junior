@@ -6,14 +6,16 @@ export type initialStateType = {
     isLoading: boolean,
     chars: Character[] | null,
     error: string,
-    isLoaded: boolean
+    isLoaded: boolean,
+    appliedLikeFilter: boolean
 }
 
 export const initialState: initialStateType = {
     isLoading: false,
     chars: null,
     error: '',
-    isLoaded: false
+    isLoaded: false,
+    appliedLikeFilter: false
 }
 
 export const charsReducer = (state = initialState, action: CharactersActions): initialStateType => {
@@ -25,6 +27,7 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
             }
         case CharsActionTypes.FETCH_CHARS_SUCCESS: {
             return {
+                ...state,
                 isLoading: false,
                 chars: action.payload,
                 error: '',
@@ -47,7 +50,7 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
             }
         }
         case CharsActionTypes.LIKE_CHAR: {
-            let char = state.chars[action.payload - 1] // cause char_id starts with 1 and not 0
+            let char = state.chars.find(item => item.char_id === action.payload)
             char.isLiked = true
             return {
                 ...state
@@ -56,7 +59,8 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
         case CharsActionTypes.FILTER_LIKED_CHARS_ON: {
             return {
                 ...state,
-                chars: state.chars.filter(char => char.isLiked === true)
+                chars: state.chars.filter(char => char.isLiked === true),
+                appliedLikeFilter: true
             }
         }
         default: return state

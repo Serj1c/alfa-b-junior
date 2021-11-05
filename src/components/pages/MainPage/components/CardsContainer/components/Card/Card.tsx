@@ -2,9 +2,10 @@ import React, { useCallback } from 'react'
 import { Character } from 'models/Character'
 import { Button, Icon } from 'components/common'
 import styles from './Card.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CharactersActions, deleteCharacter, likeCharacter } from 'redux/chars/charsActions'
+import { AppStateType } from 'redux/rootReducer'
 
 interface Props {
     item: Character
@@ -13,6 +14,7 @@ interface Props {
 export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
 
     const dispatch = useDispatch<Dispatch<CharactersActions>>()
+    const liked = useSelector((state: AppStateType) => state.chars.chars.find(char => char.char_id === item.char_id && char.isLiked))
 
     const handleDelete = useCallback(() => {
         dispatch(deleteCharacter(item.char_id))
@@ -26,10 +28,10 @@ export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
         <div className={styles.card}>
             <img src={item.img} alt="portrait"/>
             <div className={styles.card_bottom}>
-                <Button onClick={handleLike}>
-                    <Icon type="ThumbUp" size="l" />
+                <Button design="default" onClick={handleLike}>
+                    {liked ? <Icon type="ThumbUpFilled" size="l" /> : <Icon type="ThumbUp" size="l" />}
                 </Button>
-                <Button onClick={handleDelete}>
+                <Button design="caution" onClick={handleDelete}>
                     <Icon type="TrashBin" size="l" />
                 </Button>
             </div>

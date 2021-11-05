@@ -22,14 +22,14 @@ export const MainPage: React.FunctionComponent = (): JSX.Element => {
     
     const handleFilter = useCallback(() => {
         dispatch(filterLikedCharacters())
-    }, [])
+    }, [dispatch])
 
     return (
         <>
             <Header />
             <section className={styles.root}>
-                <Button onClick={handleFilter}>
-                    <span>Show only liked</span><Icon type="Filter" size="l" />
+                <Button design="primary" onClick={handleFilter}>
+                    <span>Only liked</span><Icon type="Filter" size="l" />
                 </Button>
             </section>
             {chars ? <CardsContainer chars={chars} /> : <Spinner />}

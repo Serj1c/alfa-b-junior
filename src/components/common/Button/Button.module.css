@@ -1,7 +1,5 @@
-.button {
-    padding: 1rem;
+.root {
     font-size: 1rem;
-    margin-bottom: 1rem;
     border-radius: 5px;
     border: none;
     background-color: #fff;
@@ -14,13 +12,25 @@
   justify-content: center;
 }
 
-.button:hover {
-    background: skyblue;
-    cursor: pointer;
+.root:hover {
+  cursor: pointer;
+}
+
+.root_design_default:hover {
+    background: #009cf3;
+}
+
+.root_design_primary:hover {
+  background: #ffd166;
+}
+
+.root_design_caution:hover {
+  background-color: #e82c2f;
+  box-shadow: 0 2px 8px rgba(232, 44, 47, 0.7);
 }
 
 @media (max-width: 768px) {
-    .button {
+    .root {
       width: 100%;
     }
 }
