@@ -10,7 +10,8 @@ import styles from './MainPage.module.css'
 export const MainPage: React.FunctionComponent = (): JSX.Element => {
 
     const dispatch = useDispatch()
-    const chars = useSelector((state:AppStateType) => state.chars.chars)
+    const filteredChars = useSelector((state:AppStateType) => state.chars.filteredChars)
+    const isFiltered = useSelector((state: AppStateType) => state.chars.appliedLikeFilter)
 
 	useEffect(() => {
 		try {
@@ -29,10 +30,10 @@ export const MainPage: React.FunctionComponent = (): JSX.Element => {
             <Header />
             <section className={styles.root}>
                 <Button design="primary" onClick={handleFilter}>
-                    <span>Only liked</span><Icon type="Filter" size="l" />
+                    <span>Only liked</span>{isFiltered ? <Icon type="FilterOff" size="l"/> : <Icon type="Filter" size="l"/>}
                 </Button>
             </section>
-            {chars ? <CardsContainer chars={chars} /> : <Spinner />}
+            {filteredChars ? <CardsContainer chars={filteredChars} /> : <Spinner />}
         </>
     )
 }

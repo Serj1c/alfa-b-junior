@@ -31,15 +31,11 @@ export type LikeCharacterType = {
 }
 
 export type FilterLikedCharactersType = {
-    type: CharsActionTypes.FILTER_LIKED_CHARS_ON
-}
-
-export type FilterLikedCharactersOffType = {
-    type: CharsActionTypes.FILTER_LIKED_CHARS_OFF
+    type: CharsActionTypes.FILTER_LIKED_CHARS
 }
 
 export type CharactersActions = CharactersRequestType | CharactersSuccessType | CharactersFailureType 
-| LikeCharacterType | DeleteCharacterType | FilterLikedCharactersType | FilterLikedCharactersOffType
+| LikeCharacterType | DeleteCharacterType | FilterLikedCharactersType
 
 export const fetchCharactersRequest = (): CharactersRequestType => {
     return {
@@ -91,12 +87,6 @@ export const likeCharacter = (id: Character["char_id"]): LikeCharacterType => {
 
 export const filterLikedCharacters = (): FilterLikedCharactersType => {
     return {
-        type: CharsActionTypes.FILTER_LIKED_CHARS_ON
-    }
-}
-
-export const filterLikedCharactersOff = (): FilterLikedCharactersOffType => {
-    return {
-        type: CharsActionTypes.FILTER_LIKED_CHARS_OFF
+        type: CharsActionTypes.FILTER_LIKED_CHARS
     }
 }

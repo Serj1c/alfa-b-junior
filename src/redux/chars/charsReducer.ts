@@ -7,7 +7,8 @@ export type initialStateType = {
     chars: Character[] | null,
     error: string,
     isLoaded: boolean,
-    appliedLikeFilter: boolean
+    appliedLikeFilter: boolean,
+    filteredChars: Character[] | null
 }
 
 export const initialState: initialStateType = {
@@ -15,7 +16,8 @@ export const initialState: initialStateType = {
     chars: null,
     error: '',
     isLoaded: false,
-    appliedLikeFilter: false
+    appliedLikeFilter: false,
+    filteredChars: null
 }
 
 export const charsReducer = (state = initialState, action: CharactersActions): initialStateType => {
@@ -30,6 +32,7 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
                 ...state,
                 isLoading: false,
                 chars: action.payload,
+                filteredChars: action.payload,
                 error: '',
                 isLoaded: true
             }
@@ -39,28 +42,41 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
                 ...state,
                 isLoading: false,
                 chars: null,
+                filteredChars: null,
                 error: action.payload,
                 isLoaded: false
             }
         }
         case CharsActionTypes.DELETE_CHAR: {
+            let afterDeletion = state.chars.filter(char => char.char_id !== action.payload)
+            state.filteredChars = afterDeletion
+            state.chars = afterDeletion
             return {
-                ...state,
-                chars: state.chars.filter(char => char.char_id !== action.payload)
+                ...state
             }
         }
         case CharsActionTypes.LIKE_CHAR: {
             let char = state.chars.find(item => item.char_id === action.payload)
             char.isLiked = true
+            state.filteredChars = state.chars
             return {
                 ...state
             }
         }
-        case CharsActionTypes.FILTER_LIKED_CHARS_ON: {
-            return {
-                ...state,
-                chars: state.chars.filter(char => char.isLiked === true),
-                appliedLikeFilter: true
+        case CharsActionTypes.FILTER_LIKED_CHARS: {
+            if (state.appliedLikeFilter) {
+                state.appliedLikeFilter = false
+                state.filteredChars = state.chars
+                return {
+                    ...state
+                }
+            } else {
+                state.appliedLikeFilter = true
+                let filtered = state.chars.filter(char => char.isLiked === true)
+                state.filteredChars = filtered
+                return {
+                    ...state
+                }
             }
         }
         default: return state

@@ -14,7 +14,7 @@ interface Props {
 export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
 
     const dispatch = useDispatch<Dispatch<CharactersActions>>()
-    const liked = useSelector((state: AppStateType) => state.chars.chars.find(char => char.char_id === item.char_id && char.isLiked))
+    const liked = useSelector((state: AppStateType) => state.chars.filteredChars.find(char => char.char_id === item.char_id && char.isLiked))
 
     const handleDelete = useCallback(() => {
         dispatch(deleteCharacter(item.char_id))

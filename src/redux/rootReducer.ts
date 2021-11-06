@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { charsReducer } from './indexReducers'
+import { charsReducer } from './chars/charsReducer'
 
 export const rootReducer = combineReducers({
     chars: charsReducer
