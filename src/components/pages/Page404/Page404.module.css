@@ -1,0 +1,10 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    align-items: center;
+}
+
+.root_link {
+    color: #ffd166;
+}
