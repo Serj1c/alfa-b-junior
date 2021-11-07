@@ -31,6 +31,7 @@ export const Card: React.FunctionComponent<Props> = ({ item }): JSX.Element => {
                 <Button design="default" onClick={handleLike}>
                     {liked ? <Icon type="ThumbUpFilled" size="l" /> : <Icon type="ThumbUp" size="l" />}
                 </Button>
+                <span className={styles.card_bottom_text}>{item.status}</span>
                 <Button design="caution" onClick={handleDelete}>
                     <Icon type="TrashBin" size="l" />
                 </Button>

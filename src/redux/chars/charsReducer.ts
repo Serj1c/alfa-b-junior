@@ -57,7 +57,7 @@ export const charsReducer = (state = initialState, action: CharactersActions): i
         }
         case CharsActionTypes.LIKE_CHAR: {
             let char = state.chars.find(item => item.char_id === action.payload)
-            char.isLiked = true
+            char.isLiked = !char.isLiked
             state.filteredChars = state.chars
             return {
                 ...state
