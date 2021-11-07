@@ -8,7 +8,7 @@ export const App: React.FunctionComponent = (): JSX.Element => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={MainPage} />
+        <Route path="/" component={MainPage} />
 				<Route component={Page404}/>
       </Switch>
     </Router>

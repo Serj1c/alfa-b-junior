@@ -1,6 +1,6 @@
 {
   "name": "alfa-b-jun",
-  "homepage": "http://serj1c.github.io/alfa-b-jun",
+  "homepage": "https://serj1c.github.io/alfa-b-junior",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "redux-thunk": "^2.4.0"
   },
   "scripts": {
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
